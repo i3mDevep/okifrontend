@@ -1,4 +1,4 @@
-import Login from '../components/forms/login'
+import LoginScreen from '../views/login'
 
 export const settings = {
   path_default_access_restricted: "/",
@@ -15,7 +15,7 @@ const routes = [
     name: 'Login',
     exact: true,
     path: '/',
-    component: Login,
+    component: LoginScreen,
   },
   {
     name: 'Restablecer contraseña',
