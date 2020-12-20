@@ -1,7 +1,8 @@
 import Login from '../../components/forms/login'
+import './style.css'
 
 const LoginScreen = () => (
-    <div style={{ margin: 0, backgroundColor: '#000'}}>
+    <div className='login__view__root'>
         <Login />
     </div>
 )

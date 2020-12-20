@@ -1,4 +1,5 @@
 import LoginScreen from '../views/login'
+import SideBarConfig from '../components/layout/sidebar';
 
 export const settings = {
   path_default_access_restricted: "/",
@@ -20,15 +21,16 @@ const routes = [
   {
     name: 'Restablecer contraseña',
     path: '/app',
-    type_route: 'private',
-    component: () => <h1>loca</h1>,
+    type_route: 'public',
+    layout: SideBarConfig,
+    component: Cm,
     routes: [
       {
-        path: '/app/perro',
+        path: '/app/products',
         component: Cm3,
         routes: [
           {
-            path: '/app/perro/:id',
+            path: '/app/products/:id',
             component: () => <h1> perro detalle </h1>,
             exact: true
           }

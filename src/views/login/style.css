@@ -1,0 +1,12 @@
+.login__view__root::after {
+    content: "";
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    opacity: .7;
+    background-image: url(https://media.istockphoto.com/vectors/groomers-grooming-dogs-in-pet-salon-flat-vector-vector-id1164273112?k=6&m=1164273112&s=612x612&w=0&h=uzfa9UA1CPAfgf6RM8bil8eSOFX5GgK9xbkCjJVLX6E=);    
+}

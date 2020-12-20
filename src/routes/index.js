@@ -1,5 +1,5 @@
 import { Switch } from "react-router-dom";
-import CustomeRoute from './custome-routes'
+import CustomeRoute from "./custome-routes";
 import React from "react";
 
 import routes from "./config";
@@ -11,7 +11,7 @@ const RouteWithSubRoutes = (route) => {
     ));
     return (
       <Switch>
-        <CustomeRoute {...route} exact={true}  />
+        <CustomeRoute {...route} exact={true} />
         {routes}
       </Switch>
     );
@@ -21,9 +21,17 @@ const RouteWithSubRoutes = (route) => {
 
 const RouteConfig = () => (
   <Switch>
-    {routes.map((r) => (
-      <RouteWithSubRoutes key={`route-config-${r.path}`} {...r} />
-    ))}
+    {routes.map((r) => {
+      if(r.layout){
+        let Layout = r.layout
+        return (
+          <Layout>
+            <RouteWithSubRoutes key={`route-config-${r.path}`} {...r} />
+          </Layout>
+        )
+      }
+      return <RouteWithSubRoutes key={`route-config-${r.path}`} {...r} />;
+    })}
   </Switch>
 );
 
