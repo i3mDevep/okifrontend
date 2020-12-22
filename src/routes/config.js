@@ -1,4 +1,5 @@
 import LoginScreen from '../views/login'
+import ProductListScreen from '../containers/tables/products'
 import SideBarConfig from '../components/layout/sidebar';
 
 export const settings = {
@@ -27,7 +28,7 @@ const routes = [
     routes: [
       {
         path: '/app/products',
-        component: Cm3,
+        component: ProductListScreen,
         routes: [
           {
             path: '/app/products/:id',

@@ -19,13 +19,12 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import { NavLink as CustomNavLink } from "react-router-dom";
-import { logoMain } from "../../common/images";
+import { imgSideBarBackground, logoMain } from '../../common/urls'
 import "./style.css";
 
 const drawerWidth = 240;
 
-const URL_BACKGROUND =
-  "https://image.freepik.com/vector-gratis/dibujos-animados-lindo-gato-universo-dentro-ilustracion-dibujos-animados-estilo-comic-moda_122058-106.jpg";
+const URL_BACKGROUND = imgSideBarBackground
 
 const themer = createMuiTheme({
   typography: {
@@ -64,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
   drawerOpen: {
     width: drawerWidth,
     backgroundImage: `url(${URL_BACKGROUND})`,
-    backgroundPosition: "left",
+    backgroundPosition: "-3rem",
     backgroundSize: "cover",
     color: "white",
     transition: theme.transitions.create("width", {
@@ -160,7 +159,8 @@ function RederSideBar({ c, color }) {
     setopen(!open);
   };
   if (c.routes) {
-    const item = <ItemSideBar content={c} toggleItem={handleToggle} toggle={!open} />;
+    const key = nextId("side-bar-id-i-")
+    const item = <ItemSideBar key={key} content={c} toggleItem={handleToggle} toggle={!open} />;
     const subitems = c.routes.map((route, i) => {
       const key = nextId("side-bar-id-")
       return <RederSideBar key={key} c={route} color={c.color} />;
@@ -216,7 +216,6 @@ const SideBar = ({ children, config }) => {
           className={classes.content}
           style={{ width: "-webkit-fill-available" }}
         >
-          <div className={classes.toolbar} />
           {children}
         </main>
       </div>

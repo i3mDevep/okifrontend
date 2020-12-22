@@ -1,9 +1,9 @@
-import Login from '../../components/forms/login'
+import LoginContainer from '../../containers/login'
 import './style.css'
 
 const LoginScreen = () => (
     <div className='login__view__root'>
-        <Login />
+        <LoginContainer />
     </div>
 )
 export default LoginScreen
