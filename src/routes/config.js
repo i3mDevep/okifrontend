@@ -1,6 +1,8 @@
 import LoginScreen from '../views/login'
-import ProductListScreen from '../containers/tables/products'
+import ProductListScreen from '../containers/products/products-list'
+import ProductCreateScreen from '../containers/products/products-create'
 import SideBarConfig from '../components/layout/sidebar';
+import CreateProduct from '../components/forms/products/create-product'
 
 export const settings = {
   path_default_access_restricted: "/",
@@ -32,7 +34,7 @@ const routes = [
         routes: [
           {
             path: '/app/products/:id',
-            component: () => <h1> perro detalle </h1>,
+            component: ProductCreateScreen,
             exact: true
           }
         ]

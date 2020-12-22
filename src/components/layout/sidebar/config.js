@@ -24,7 +24,7 @@ export const config = [
         icon: AdbIcon,
     },
     {
-        title: 'Pedidos en curso',
+        title: 'Carrito de Compras',
         path: '/app/car-shop',
         icon: AdbIcon,
     }

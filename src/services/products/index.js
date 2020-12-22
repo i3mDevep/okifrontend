@@ -1,5 +1,9 @@
 import api from '../instance'
 
-export const ServiceListProducts = async (params) => {
+export const serviceListProducts = async (params) => {
     return await api.get('/products/' + params)
+}
+export const serviceCreateProduct = async (body) => {
+    console.log(body)
+    return await api.post('/products/', body)
 }

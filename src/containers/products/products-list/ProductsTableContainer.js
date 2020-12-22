@@ -1,5 +1,5 @@
-import ProductsTable from "../../../components/tables/products";
-import { ServiceListProducts } from "../../../services/products";
+import ProductsTable from "../../../components/products/products-list";
+import { serviceListProducts } from "../../../services/products";
 
 export default function ProductsTableContainer() {
   return (
@@ -16,7 +16,7 @@ export default function ProductsTableContainer() {
               "&search=" +
               query.search;
             try {
-              const result = await ServiceListProducts(params);
+              const result = await serviceListProducts(params);
               resolve({
                 data: result.data.results,
                 page: query.page,
