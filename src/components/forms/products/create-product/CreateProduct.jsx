@@ -1,16 +1,25 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import FormControl from "@material-ui/core/FormControl";
-import NumberFormat from "react-number-format";
+import Alert from "@material-ui/lab/Alert";
 
 import NotExistProvider from "./NotExistProviders";
 import NotExistMark from "./NotExisteMark";
+
+import {
+  TextFieldController,
+  NumberFieldController,
+  SelectFieldController,
+} from "../../../common/inputs";
+
+import unit from '../../../../const/unit'
+
+const UNITS = unit
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -38,20 +47,6 @@ const useStyles = makeStyles((theme) => ({
     width: 250,
   },
 }));
-const unit = [
-  {
-    value: 0,
-    label: "Unidad",
-  },
-  {
-    value: 1,
-    label: "Kilogramo",
-  },
-  {
-    value: 2,
-    label: "Litros",
-  },
-];
 
 export default function CreateProduct({ onSubmit, mark, provider }) {
   const classes = useStyles();
@@ -68,13 +63,16 @@ export default function CreateProduct({ onSubmit, mark, provider }) {
     marca: "",
     unit: "",
   };
-  function resetForm(){
-    reset(defaultValues)
+  function resetForm() {
+    reset(defaultValues);
   }
   return (
-    <Container component="main" maxWidth="lg">
+    <Container component="main" maxWidth="lg" style={{ position: "relative" }}>
       <CssBaseline />
       <div className={classes.paper}>
+        <Alert style={{ position: "absolute", left: "10px" }} severity="info">
+          Crea tus productos desde este lugar
+        </Alert>
         <img
           alt=""
           src={
@@ -90,220 +88,87 @@ export default function CreateProduct({ onSubmit, mark, provider }) {
         >
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>
-              <Controller
-                name="name"
-                as={
-                  <TextField
-                    required
-                    id="name"
-                    name="name"
-                    label="Nombre del producto"
-                    fullWidth
-                    autoComplete="name"
-                  />
-                }
+              <TextFieldController
                 control={control}
-                defaultValue=""
-                rules={{
-                  required: "Required",
-                }}
+                name="name"
+                label="Nombre del producto"
+                required
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <Controller
-                name="barcode"
-                as={
-                  <TextField
-                    required
-                    id="barcode"
-                    name="barcode"
-                    label="Codigo"
-                    fullWidth
-                    autoComplete="barcode"
-                  />
-                }
+              <TextFieldController
                 control={control}
-                defaultValue=""
-                rules={{
-                  required: "Required",
-                }}
+                name="barcode"
+                label="Codigo"
+                required
               />
             </Grid>
             <Grid item xs={12} sm={5}>
-              <Controller
-                as={
-                  <NumberFormat
-                    customInput={TextField}
-                    thousandSeparator={true}
-                    prefix={"$ "}
-                    onValueChange={(v) => {
-                      console.log(v.value);
-                    }}
-                  />
-                }
-                fullWidth
+              <NumberFieldController
+                control={control}
                 name="price"
                 label="Precio de producto"
-                defaultValue=""
                 required
-                control={control}
-                rules={{
-                  required: "Required",
-                }}
               />
             </Grid>
             <Grid item xs={12} sm={5}>
-              <Controller
-                as={
-                  <NumberFormat
-                    customInput={TextField}
-                    thousandSeparator={true}
-                    prefix={"$ "}
-                    onValueChange={(v) => {
-                      console.log(v.value);
-                    }}
-                  />
-                }
-                fullWidth
+              <NumberFieldController
+                control={control}
                 name="cost"
                 label="Costo de producto"
-                defaultValue=""
                 required
-                control={control}
-                rules={{
-                  required: "Required",
-                }}
               />
             </Grid>
             <Grid item xs={12} sm={2}>
-              <Controller
-                name="count"
-                as={
-                  <TextField
-                    id="count"
-                    name="count"
-                    label="Cantidad"
-                    type="number"
-                    required
-                    fullWidth
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                  />
-                }
+              <TextFieldController
                 control={control}
-                defaultValue=""
-                rules={{
-                  required: "Required",
+                name="count"
+                label="Cantidad"
+                type="number"
+                required
+                InputLabelProps={{
+                  shrink: true,
                 }}
               />
             </Grid>
             <Grid item xs={12} sm={4}>
               <NotExistProvider />
-              <Controller
-                name="provider"
-                as={
-                  <TextField
-                    id="provider"
-                    select
-                    label="Proveedor"
-                    fullWidth
-                    SelectProps={{
-                      native: true,
-                    }}
-                    helperText="Por favor selecciona el proveedor"
-                  >
-                    <option aria-label="None" value="" />
-                    {Array.isArray(provider) &&
-                      provider.map((option) => (
-                        <option key={option.value} value={option.value}>
-                          {option.label}
-                        </option>
-                      ))}
-                  </TextField>
-                }
+              <SelectFieldController
                 control={control}
-                defaultValue=""
-                rules={{
-                  required: "Required",
-                }}
+                helperText="Por favor selecciona un proveedor"
+                name="provider"
+                label="Proveedor"
+                options={provider}
               />
             </Grid>
             <Grid item xs={12} sm={4}>
               <NotExistMark />
-              <Controller
-                name="marca"
-                as={
-                  <TextField
-                    id="marca"
-                    select
-                    label="Marca"
-                    fullWidth
-                    SelectProps={{
-                      native: true,
-                    }}
-                    helperText="Por favor selecciona una marca"
-                  >
-                    <option aria-label="None" value="" />
-                    {Array.isArray(mark) &&
-                      mark.map((option) => (
-                        <option key={option.value} value={option.value}>
-                          {option.label}
-                        </option>
-                      ))}
-                  </TextField>
-                }
+              <SelectFieldController
                 control={control}
-                defaultValue=""
-                rules={{
-                  required: "Required",
-                }}
+                helperText="Por favor selecciona una marca"
+                name="marca"
+                label="Marca"
+                options={mark}
               />
             </Grid>
             <Grid item xs={12} sm={4} style={{ marginTop: "30px" }}>
-              <Controller
-                name="unit"
-                as={
-                  <TextField
-                    id="unit"
-                    select
-                    label="Unidad"
-                    fullWidth
-                    SelectProps={{
-                      native: true,
-                    }}
-                    helperText="Por favor selecciona unidad"
-                  >
-                    <option aria-label="None" value="" />
-                    {unit.map((option) => (
-                      <option key={option.value} value={option.value}>
-                        {option.label}
-                      </option>
-                    ))}
-                  </TextField>
-                }
+              <SelectFieldController
                 control={control}
-                defaultValue=""
-                rules={{
-                  required: "Required",
-                }}
+                helperText="Por favor selecciona una unidad"
+                name="unit"
+                label="Unidad"
+                options={UNITS}
               />
             </Grid>
           </Grid>
           <FormControl fullWidth style={{ marginTop: "30px" }}>
-            <Controller
-              name="description"
-              as={
-                <TextField
-                  id="description"
-                  label="Descripción"
-                  multiline
-                  rows={2}
-                  variant="outlined"
-                />
-              }
+            <TextFieldController
               control={control}
-              defaultValue=""
+              name="description"
+              label="Descripción"
+              multiline
+              rows={2}
+              variant="outlined"
             />
           </FormControl>
           <Button

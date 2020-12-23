@@ -2,7 +2,6 @@ import LoginScreen from '../views/login'
 import ProductListScreen from '../containers/products/products-list'
 import ProductCreateScreen from '../containers/products/products-create'
 import SideBarConfig from '../components/layout/sidebar';
-import CreateProduct from '../components/forms/products/create-product'
 
 export const settings = {
   path_default_access_restricted: "/",
@@ -33,10 +32,14 @@ const routes = [
         component: ProductListScreen,
         routes: [
           {
-            path: '/app/products/:id',
+            path: '/app/products/detail/:id',
+            component: Cm3,
+          },
+          {
+            path: '/app/products/create',
             component: ProductCreateScreen,
-            exact: true
-          }
+            exact: true,
+          },
         ]
       },
       {
