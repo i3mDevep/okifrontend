@@ -2,7 +2,7 @@ import LoginScreen from '../views/login'
 import ProductListScreen from '../containers/products/products-list'
 import ProductCreateScreen from '../containers/products/products-create'
 import SideBarConfig from '../components/layout/sidebar';
-import Forms from '../components/common/templeate-forms/Forms'
+import Perro from '../components/products/product-create/ProductCreateComponent'
 
 export const settings = {
   path_default_access_restricted: "/",
@@ -26,7 +26,7 @@ const routes = [
     path: '/app',
     type_route: 'public',
     layout: SideBarConfig,
-    component: Forms,
+    component: Perro,
     routes: [
       {
         path: '/app/products',

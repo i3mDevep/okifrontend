@@ -7,14 +7,14 @@ export const FieldController = ({
   field,
   controller,
   grid,
+  children,
+  style,
 }) => {
   let ComponentField = component;
   return (
-    <Grid item {...grid}>
-      <Controller
-        {...controller}
-        as={<ComponentField {...field} />}
-      />
+    <Grid item {...grid} style={style} >
+      {children}
+      <Controller {...controller} as={<ComponentField {...field} />} />
     </Grid>
   );
 };
