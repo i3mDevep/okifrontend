@@ -1,2 +1,2 @@
-import ProductCreateContainer from '../../../containers/products/products-create'
-export default ProductCreateContainer
+import ProductCreateView from '../../../containers/products/product-create'
+export default ProductCreateView

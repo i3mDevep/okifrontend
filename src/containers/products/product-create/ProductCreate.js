@@ -1,22 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { serviceListProviders } from "../../../services/providers";
-import { serviceListMarks } from "../../../services/marks";
+import React from "react";
 import { serviceCreateProduct } from "../../../services/products";
-import { assingFormatOptions } from "../../../utils/assignOptionsValues";
 import { parseFormatMoney } from "../../../utils/formatMoney";
 import { convertErrorInString } from "../../../utils/error/convertErrorInString"
-import ProductFormCreate from "../../../components/forms/products/create-product";
+import ProductCreateComponent from "../../../components/products/product-create";
 import ReactNotification, {
   quicklyNotification
 } from "../../../components/common/notifications";
+import { render } from './render'
 
 export default function ProductFormCreateContainer() {
-  const [marks, setmarks] = useState([]);
-  const [providers, setproviders] = useState([]);
-  useEffect(async () => {
-    setmarks(await assingFormatOptions(serviceListMarks));
-    setproviders(await assingFormatOptions(serviceListProviders));
-  }, []);
+
   const handlerOnSubmit = async (data, resetForm) => {
     data["num_sale"] = 0;
     data["price"] = parseFormatMoney(data, "price");
@@ -36,10 +29,9 @@ export default function ProductFormCreateContainer() {
   return (
     <div>
       <ReactNotification />
-      <ProductFormCreate
-        mark={marks}
-        provider={providers}
+      <ProductCreateComponent
         onSubmit={handlerOnSubmit}
+        fields={render}
       />
     </div>
   );

@@ -2,16 +2,16 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 
-export default function NotExistMark() {
+export default function ButtonRedirect({ redirect, title, color }) {
   let history = useHistory();
 
   function handleClick() {
-    history.push("/home");
+    history.push(redirect);
   }
 
   return (
-    <Button variant="outlined" color="secondary" onClick={handleClick}>
-      Crear Marca
+    <Button variant="outlined" color={color} onClick={handleClick}>
+      {title}
     </Button>
   );
 }

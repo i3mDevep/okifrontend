@@ -1,8 +1,8 @@
 import LoginScreen from '../views/login'
-import ProductListScreen from '../containers/products/products-list'
-import ProductCreateScreen from '../containers/products/products-create'
+import ProductListScreen from '../views/products/products-list'
+import ProductCreateScreen from '../views/products/products-create'
+import ProviderScreen from '../views/providers'
 import SideBarConfig from '../components/layout/sidebar';
-import Perro from '../components/products/product-create/ProductCreateComponent'
 
 export const settings = {
   path_default_access_restricted: "/",
@@ -26,7 +26,7 @@ const routes = [
     path: '/app',
     type_route: 'public',
     layout: SideBarConfig,
-    component: Perro,
+    component: Cm,
     routes: [
       {
         path: '/app/products',
@@ -44,8 +44,8 @@ const routes = [
         ]
       },
       {
-        path: '/app/puto',
-        component: Cm2,
+        path: '/app/providers',
+        component: ProviderScreen,
         exact: true
       }
     ]

@@ -3,8 +3,7 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import { useForm } from "react-hook-form";
-import { form as field } from "./render";
-import { RenderFieldsFields, showErrors } from "../../../common/templeate-forms";
+import { RenderListFields, showErrors } from "./index";
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -18,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Forms({ defaultValuesReset }) {
+export function GenericForm({ onSubmit, fields, defaults, button }) {
   const classes = useStyles();
 
   const {
@@ -28,20 +27,23 @@ export default function Forms({ defaultValuesReset }) {
     errors,
     formState: { isDirty, isSubmitting },
   } = useForm();
-
+  const defaultValues = {
+    provider: "",
+    marca: "",
+    unit: "",
+  };
   function resetForm() {
-    reset(defaultValuesReset);
+    reset(defaults || defaultValues);
   }
-  console.log(errors);
   return (
     <form
       className={classes.form}
       onSubmit={handleSubmit((data) => {
-        alert(JSON.stringify(data));
+        onSubmit(data, resetForm);
       })}
     >
       <Grid container spacing={3}>
-        <RenderFieldsFields render={field} control={control} />
+        <RenderListFields render={fields} control={control} />
         {showErrors(errors)}
       </Grid>
       <Button
@@ -52,7 +54,7 @@ export default function Forms({ defaultValuesReset }) {
         className={classes.submit}
         disabled={!isDirty || isSubmitting}
       >
-        Crear Producto
+        {button}
       </Button>
     </form>
   );

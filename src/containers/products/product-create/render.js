@@ -1,6 +1,14 @@
-import { listFields } from "../../../common/templeate-forms/list-fields";
+import { listFields } from "../../../components/common/templeate-forms/list-fields";
+import ButtonRedirect from '../../../components/common/button-redirect'
 
-export const form = [
+import { serviceListProviders } from "../../../services/providers";
+import { serviceListMarks } from "../../../services/marks";
+
+import { assingFormatOptions } from "../../../utils/assignOptionsValues";
+
+import unit from "../../../const/unit";
+
+export const render = [
   {
     grid: { xs: 12, sm: 6 },
     component: listFields["textField"],
@@ -94,6 +102,7 @@ export const form = [
   },
   {
     grid: { xs: 12, sm: 4 },
+    children: <ButtonRedirect title="Crear Proveedor" color="primary" />,
     component: listFields["selectField"],
     controller: {
       defaultValue: "",
@@ -113,9 +122,11 @@ export const form = [
       helperText: "Por favor selecciona un proveedor",
       options: [{ label: "puto", value: 1 }],
     },
+    promise: ['options', () => assingFormatOptions(serviceListProviders)]
   },
   {
     grid: { xs: 12, sm: 4 },
+    children: <ButtonRedirect title="Crear Marca" color="secondary" />,
     component: listFields["selectField"],
     controller: {
       defaultValue: "",
@@ -134,10 +145,12 @@ export const form = [
       helperText: "Por favor selecciona una marca",
       options: [{ label: "puto", value: 1 }],
     },
+    promise: ['options', () => assingFormatOptions(serviceListMarks)]
   },
   {
     grid: { xs: 12, sm: 4 },
     component: listFields["selectField"],
+    style: { display: "flex", marginTop: 'auto' },
     controller: {
       defaultValue: "",
       name: "unit",
@@ -153,7 +166,22 @@ export const form = [
         native: true,
       },
       helperText: "Por favor selecciona una unidad",
-      options: [{ label: "puto", value: 1 }],
+      options: unit,
+    },
+  },
+  {
+    grid: { xs: 12, sm: 12 },
+    component: listFields["textField"],
+    controller: {
+      name: "description",
+      defaultValue: "",
+    },
+    field: {
+      label: "Descripción",
+      multiline: true,
+      row: 2,
+      variant:"outlined",
+      fullWidth: true,
     },
   },
 ];
