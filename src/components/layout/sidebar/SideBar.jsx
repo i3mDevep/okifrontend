@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useLocation } from 'react-router-dom';
 import nextId from "react-id-generator";
 import clsx from "clsx";
 import {
@@ -103,15 +104,18 @@ const useStyles = makeStyles((theme) => ({
       width: "90% !important",
     },
   },
-  itemList: {
-    "&[aria-current]": {
-      backgroundColor: "#21bf73",
-    },
-  },
+  // itemList: {
+  //   "&[aria-current]": {
+  //     backgroundColor: "#21bf73 !important",
+  //   },
+  // },
 }));
 
 const SubItemSideBar = ({ content, color }) => {
   const classes = useStyles();
+  const location = useLocation();
+  const currentPath = location.pathname;
+  const color_ = currentPath === content.path? '#21bf73': color
   let Icon = content.icon;
   return (
     <ListItem
@@ -119,7 +123,7 @@ const SubItemSideBar = ({ content, color }) => {
       component={CustomNavLink}
       className={classes.itemList}
       to={content.path}
-      style={{ backgroundColor: color }}
+      style={{ backgroundColor: color_ }}
     >
       <ListItemIcon>
         <Icon style={{ color: "white" }} />
@@ -154,7 +158,7 @@ const ItemSideBar = ({ content, toggleItem, toggle }) => {
   );
 };
 function RederSideBar({ c, color }) {
-  const [open, setopen] = useState(false);
+  const [open, setopen] = useState(true);
   const handleToggle = () => {
     setopen(!open);
   };

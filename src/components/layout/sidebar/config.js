@@ -40,7 +40,7 @@ export const config = [
     },
     {
         title: 'Carrito de Compras',
-        path: '/app/car-shop',
+        path: '/app/card-shop',
         icon: AdbIcon,
     }
 ]

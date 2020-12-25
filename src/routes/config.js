@@ -2,7 +2,9 @@ import LoginScreen from '../views/login'
 import ProductListScreen from '../views/products/products-list'
 import ProductCreateScreen from '../views/products/products-create'
 import ProviderScreen from '../views/providers'
+import MarkScreen from '../views/marks'
 import SideBarConfig from '../components/layout/sidebar';
+import CardShopScreen from '../views/card-shop'
 
 export const settings = {
   path_default_access_restricted: "/",
@@ -46,6 +48,16 @@ const routes = [
       {
         path: '/app/providers',
         component: ProviderScreen,
+        exact: true
+      },
+      {
+        path: '/app/marks',
+        component: MarkScreen,
+        exact: true
+      },
+      {
+        path: '/app/card-shop',
+        component: CardShopScreen,
         exact: true
       }
     ]

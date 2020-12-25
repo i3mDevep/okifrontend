@@ -47,7 +47,7 @@ export const render = [
     grid: { xs: 12, sm: 6 },
     component: listFields["textField"],
     controller: {
-      name: "page_url",
+      name: "web",
       defaultValue: "",
     },
     field: {

@@ -17,6 +17,30 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+export function SimpleForm({ onSubmit, fields }) {
+  const classes = useStyles();
+
+  const { handleSubmit, control, reset, errors } = useForm();
+
+  function resetForm() {
+    reset();
+  }
+  return (
+    <form
+      className={classes.form}
+      onSubmit={handleSubmit((data) => {
+        onSubmit(data, resetForm);
+      })}
+    >
+      <Grid container spacing={3}>
+        <RenderListFields render={fields} control={control} />
+        {showErrors(errors)}
+      </Grid>
+      <input style={{ visibility: "hidden" }} type="submit" value="Submit" />
+    </form>
+  );
+}
+
 export function GenericForm({ onSubmit, fields, defaults, button }) {
   const classes = useStyles();
 

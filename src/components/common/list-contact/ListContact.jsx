@@ -5,7 +5,9 @@ import List from "@material-ui/core/List";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
-    maxWidth: "36ch",
+    maxWidth: "37ch",
+    height: "90vh",
+    overflowY: 'auto',
     backgroundColor: theme.palette.background.paper,
   },
 }));
