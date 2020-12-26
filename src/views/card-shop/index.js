@@ -1,10 +1,6 @@
 import React from "react";
-import CardShopListContainer from "../../containers/card-shop/list";
+import { ResumeAndTable } from "../../containers/card-shops";
 
-export default function CardShopView() {
-  return (
-    <div>
-      <CardShopListContainer />
-    </div>
-  );
+export default function ResumeAndTableView() {
+  return <ResumeAndTable />;
 }

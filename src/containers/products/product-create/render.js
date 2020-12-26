@@ -102,7 +102,7 @@ export const render = [
   },
   {
     grid: { xs: 12, sm: 4 },
-    children: <ButtonRedirect title="Crear Proveedor" color="primary" />,
+    children: <ButtonRedirect redirect="/app/providers" title="Crear Proveedor" color="primary" />,
     component: listFields["selectField"],
     controller: {
       defaultValue: "",
@@ -126,7 +126,7 @@ export const render = [
   },
   {
     grid: { xs: 12, sm: 4 },
-    children: <ButtonRedirect title="Crear Marca" color="secondary" />,
+    children: <ButtonRedirect redirect="/app/marks" title="Crear Marca" color="secondary" />,
     component: listFields["selectField"],
     controller: {
       defaultValue: "",

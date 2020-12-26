@@ -1,2 +1,2 @@
-import CardShopTable from './CardShop'
+import CardShopTable from './CardShopTable'
 export default CardShopTable

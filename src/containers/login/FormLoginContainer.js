@@ -8,7 +8,7 @@ function FormLoginContainer() {
   const handleOnSubmit = async (data) => {
     try {
       let response = await signIn(data);
-      activateAuth(response.data.access)
+      activateAuth(response.data.access, response.data.refresh)
     } catch (error) {
       console.error(error);
     }

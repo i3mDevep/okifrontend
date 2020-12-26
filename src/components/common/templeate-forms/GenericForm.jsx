@@ -17,13 +17,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function SimpleForm({ onSubmit, fields }) {
+export function SimpleForm({ onSubmit, fields, defaultReset }) {
   const classes = useStyles();
 
   const { handleSubmit, control, reset, errors } = useForm();
 
   function resetForm() {
-    reset();
+    reset(defaultReset);
   }
   return (
     <form

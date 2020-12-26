@@ -38,10 +38,10 @@ function ProductTable({ fndata }) {
         draggable: false,
         filtering: false,
         search: true,
-        headerStyle: {
-          backgroundImage: "linear-gradient(#434f69, #6a94bf)",
-          color: "#FFF",
-        },
+        // headerStyle: {
+        //   backgroundImage: "linear-gradient(#434f69, #6a94bf)",
+        //   color: "#FFF",
+        // },
       }}
       localization={{
         body: {

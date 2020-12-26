@@ -25,8 +25,8 @@ const RouteConfig = () => (
       if(r.layout){
         let Layout = r.layout
         return (
-          <Layout>
-            <RouteWithSubRoutes key={`route-config-${r.path}`} {...r} />
+          <Layout key={`route-config-${r.path}`} >
+            <RouteWithSubRoutes {...r} />
           </Layout>
         )
       }

@@ -1,10 +1,11 @@
-import {
-  BrowserRouter
-} from 'react-router-dom';
-
-import RouteConfig from './routes'
+import { BrowserRouter } from "react-router-dom";
+import { useInitialRequest } from "./hooks/useInitialRequest";
+import RouteConfig from "./routes";
+import Request from "./components/common/snipper/Request";
 
 function App() {
+  const { request, error } = useInitialRequest();
+  if (request) return <Request />;
   return (
     <BrowserRouter>
       <RouteConfig />
@@ -12,4 +13,4 @@ function App() {
   );
 }
 
-export default App
+export default App;
