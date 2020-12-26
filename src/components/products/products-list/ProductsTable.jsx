@@ -4,7 +4,7 @@ import ActionsHeader from './ActionsHeader'
 import { imgProductAvatarTable } from '../../common/urls'
 import { HeaderTable, Table } from "../../common/templeate-table";
 
-function ProductTable({ fndata }) {
+function ProductTable({ fndata, editableAction }) {
   const tableRef = React.createRef();
   return (
     <Table
@@ -23,6 +23,9 @@ function ProductTable({ fndata }) {
         { title: "Vendidos", field: "num_sale" },
       ]}
       data={fndata}
+      editable={{
+        onRowUpdate: editableAction
+      }}
       actions={[
         {
           icon: RefreshIcon,

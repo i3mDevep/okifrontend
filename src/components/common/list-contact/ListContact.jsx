@@ -1,11 +1,12 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
+import './style.css'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: "100%",
-    maxWidth: "37ch",
+    width: "105%",
+    maxWidth: "47ch",
     height: "90vh",
     overflowY: 'auto',
     backgroundColor: theme.palette.background.paper,
@@ -18,10 +19,13 @@ export default function AlignItemsList({ list = [], component: Component, onClic
     <Component innerRef={ref} {...props} />
   ));
   return (
+    <div className='list__contact__root'>
     <List className={classes.root}>
       {list.map((data) => (
         <Item key={data.id} {...data} onClick={onClick} />
       ))}
     </List>
+    </div>
+
   );
 }

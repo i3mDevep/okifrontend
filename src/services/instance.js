@@ -1,8 +1,9 @@
 import axios from "axios";
 import moment from "moment";
-import { serviceRefreshToken } from "./auth";
 
 const baseURL = "https://okibackend.herokuapp.com/api/";
+//const baseURL = "http://localhost:8000/api/";
+
 
 function token() {
   return window.localStorage.getItem("oki-token");
@@ -12,14 +13,18 @@ const instance = axios.create({
   baseURL: baseURL,
   headers: {
     "Content-Type": "application/json",
-    Authorization: `Bearer ${token()}`,
   },
 });
 
 instance.interceptors.request.use(
   async function (config) {
     // Do something before request is sent
-    console.log("alguien me intercepto puto 2");
+    config.headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token()}`,
+    }
+    console.log("alguien me intercepto puto 2", config);
+
     let dateExpirate = moment(window.localStorage.getItem("time-token"));
     let diff = dateExpirate.diff(moment(), "seconds");
     if (diff < 90) {

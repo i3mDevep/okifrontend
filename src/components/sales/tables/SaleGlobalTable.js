@@ -15,7 +15,6 @@ import Paper from "@material-ui/core/Paper";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 
-import Pagination from "@material-ui/lab/Pagination";
 
 import payment from '../../../const/payment'
 
@@ -29,7 +28,7 @@ const useRowStyles = makeStyles({
   },
 });
 
-function Row({ date_sale, type_payment, total_price_sale, total_product_sale }) {
+function Row({ id, date_sale, type_payment, total_price_sale, total_product_sale, sale_detail=[], onClickFetch }) {
 
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
@@ -41,7 +40,12 @@ function Row({ date_sale, type_payment, total_price_sale, total_product_sale }) 
           <IconButton
             aria-label="expand row"
             size="small"
-            onClick={() => setOpen(!open)}
+            onClick={() => {
+              if(!open){
+                onClickFetch(id)
+              }
+              setOpen(!open)
+            }}
           >
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
@@ -53,33 +57,27 @@ function Row({ date_sale, type_payment, total_price_sale, total_product_sale }) 
         <TableCell align="right">{total_price_sale}</TableCell>
         <TableCell align="center">{parseInt(total_product_sale)}</TableCell>
       </TableRow>
-      {/* <TableRow>
+      <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box margin={1}>
               <Typography variant="h6" gutterBottom component="div">
-                History
+                Venta Detalle
               </Typography>
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow>
-                    <TableCell>Date</TableCell>
-                    <TableCell>Customer</TableCell>
-                    <TableCell align="right">Amount</TableCell>
-                    <TableCell align="right">Total price ($)</TableCell>
+                    <TableCell>Producto</TableCell>
+                    <TableCell>Codigo</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {row.history.map((historyRow) => (
-                    <TableRow key={historyRow.date}>
+                  {sale_detail.map((sale) => (
+                    <TableRow key={sale.id}>
                       <TableCell component="th" scope="row">
-                        {historyRow.date}
+                        {sale.product.name}
                       </TableCell>
-                      <TableCell>{historyRow.customerId}</TableCell>
-                      <TableCell align="right">{historyRow.amount}</TableCell>
-                      <TableCell align="right">
-                        {Math.round(historyRow.amount * row.price * 100) / 100}
-                      </TableCell>
+                      <TableCell>{sale.product.barcode}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -87,15 +85,15 @@ function Row({ date_sale, type_payment, total_price_sale, total_product_sale }) 
             </Box>
           </Collapse>
         </TableCell>
-      </TableRow> */}
+      </TableRow>
     </React.Fragment>
   );
 }
 
-export function SaleGlobalTable({ globalSale=[] }) {
+export function SaleGlobalTable({ globalSale=[], pagination, onClickFetch, sale_detail }) {
   return (
     <TableContainer component={Paper}>
-      <Pagination style={{padding: '10px'}} count={10} color="secondary" />
+      { pagination }
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow>
@@ -108,7 +106,7 @@ export function SaleGlobalTable({ globalSale=[] }) {
         </TableHead>
         <TableBody>
           {globalSale.map((row) => (
-            <Row key={row.id} {...row} />
+            <Row key={row.id} sale_detail={sale_detail} onClickFetch={onClickFetch} {...row} />
           ))}
         </TableBody>
       </Table>

@@ -10,6 +10,7 @@ const AuthProvider = ({ children }) => {
     isAuth,
     activateAuth: (token, refresh) => {
       if ((token, refresh)) {
+        console.log('nuevo  ', token)
         const time = moment().add(23, 'h').toDate();
         window.localStorage.setItem("time-token", time);
         window.localStorage.setItem("oki-token", token);
