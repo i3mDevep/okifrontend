@@ -4,6 +4,9 @@ import ViewListIcon from '@material-ui/icons/ViewList';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
+import ViewModuleIcon from "@material-ui/icons/ViewModule";
 
 export const config = [
     {
@@ -31,16 +34,16 @@ export const config = [
     {
         title: 'Proveedores',
         path: '/app/providers',
-        icon: AdbIcon,
+        icon: AssignmentIndIcon,
     },
     {
         title: 'Marcas',
         path: '/app/marks',
-        icon: BookIcon,
+        icon: ViewModuleIcon,
     },
     {
         title: 'Carrito de Compras',
         path: '/app/card-shop',
-        icon: AdbIcon,
+        icon: ShoppingCartIcon,
     }
 ]

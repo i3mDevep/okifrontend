@@ -6,7 +6,7 @@ import { useLocation, useHistory } from "react-router-dom";
 
 export default function SaleGlobalList() {
   const [salesGlobal, setsalesGlobal] = useState([]);
-  const [numPagination, setnumPagination] = useState(2);
+  const [numPagination, setnumPagination] = useState(1);
   const [count, setcount] = useState();
   const [detail, setdetail] = useState([])
   const { search } = useLocation();
@@ -35,7 +35,6 @@ export default function SaleGlobalList() {
 
   const handleDetailSale = async(id) => {
     let response = await serviceSaleDetail(id)
-    console.log(response)
     setdetail(response.data.products)
   };
   return (

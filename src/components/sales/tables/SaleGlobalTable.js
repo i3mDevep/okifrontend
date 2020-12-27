@@ -69,6 +69,7 @@ function Row({ id, date_sale, type_payment, total_price_sale, total_product_sale
                   <TableRow>
                     <TableCell>Producto</TableCell>
                     <TableCell>Codigo</TableCell>
+                    <TableCell>Cantidad</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -78,6 +79,7 @@ function Row({ id, date_sale, type_payment, total_price_sale, total_product_sale
                         {sale.product.name}
                       </TableCell>
                       <TableCell>{sale.product.barcode}</TableCell>
+                      <TableCell>{sale.count}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>

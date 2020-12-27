@@ -1,8 +1,8 @@
 import axios from "axios";
 import moment from "moment";
 
-const baseURL = "https://okibackend.herokuapp.com/api/";
-//const baseURL = "http://localhost:8000/api/";
+//const baseURL = "https://okibackend.herokuapp.com/api/";
+const baseURL = "http://localhost:8000/api/";
 
 
 function token() {
@@ -18,7 +18,6 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   async function (config) {
-    // Do something before request is sent
     config.headers = {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token()}`,

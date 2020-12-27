@@ -32,6 +32,7 @@ function MarkListContainer({ notification_create }) {
 
   return (
     <AlignItemsList
+      title="Lista de marcas"
       component={ItemMarkComponent}
       list={marks}
       onClick={handleDelete}

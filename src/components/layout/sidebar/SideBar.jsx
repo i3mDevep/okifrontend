@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useLocation } from 'react-router-dom';
+import React, { useState, useContext } from "react";
+import { useLocation } from "react-router-dom";
 import nextId from "react-id-generator";
 import clsx from "clsx";
 import {
@@ -20,12 +20,16 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import { NavLink as CustomNavLink } from "react-router-dom";
-import { imgSideBarBackground, logoMain } from '../../common/urls'
+import { imgSideBarBackground, logoMain } from "../../common/urls";
+import Button from "@material-ui/core/Button";
+
+import authContext from '../../../context/auth'
+
 import "./style.css";
 
 const drawerWidth = 240;
 
-const URL_BACKGROUND = imgSideBarBackground
+const URL_BACKGROUND = imgSideBarBackground;
 
 const themer = createMuiTheme({
   typography: {
@@ -104,18 +108,27 @@ const useStyles = makeStyles((theme) => ({
       width: "90% !important",
     },
   },
-  // itemList: {
-  //   "&[aria-current]": {
-  //     backgroundColor: "#21bf73 !important",
-  //   },
-  // },
+  btncls: {
+    marginTop: "auto",
+    backgroundColor: "rgba(0,0,0,.3)",
+    color: "white",
+    borderRadius: 0,
+    "&:hover": {
+      backgroundColor: "rgba(0,0,0,.4)",
+    },
+  },
+  itemList: {
+    "&:hover": {
+      backgroundColor: "rgba(0,0,0,.6)",
+    },
+  },
 }));
 
 const SubItemSideBar = ({ content, color }) => {
   const classes = useStyles();
   const location = useLocation();
   const currentPath = location.pathname;
-  const color_ = currentPath === content.path? '#21bf73': color
+  const color_ = currentPath === content.path ? "#21bf73" : color;
   let Icon = content.icon;
   return (
     <ListItem
@@ -163,10 +176,17 @@ function RederSideBar({ c, color }) {
     setopen(!open);
   };
   if (c.routes) {
-    const key = nextId("side-bar-id-i-")
-    const item = <ItemSideBar key={key} content={c} toggleItem={handleToggle} toggle={!open} />;
+    const key = nextId("side-bar-id-i-");
+    const item = (
+      <ItemSideBar
+        key={key}
+        content={c}
+        toggleItem={handleToggle}
+        toggle={!open}
+      />
+    );
     const subitems = c.routes.map((route, i) => {
-      const key = nextId("side-bar-id-")
+      const key = nextId("side-bar-id-");
       return <RederSideBar key={key} c={route} color={c.color} />;
     });
     if (open) {
@@ -181,9 +201,15 @@ const SideBar = ({ children, config }) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
 
+  const { activateAuth } = useContext(authContext)
+
   const handleDrawerClose = () => {
     setOpen(!open);
   };
+
+  const handleCloseSession = () => {
+    activateAuth()
+  }
 
   return (
     <ThemeProvider theme={themer}>
@@ -211,10 +237,16 @@ const SideBar = ({ children, config }) => {
           <Divider />
           <List style={{ backgroundColor: "rgba(0, 0, 0, 0.3)" }}>
             {config.map((c, i) => {
-              const key = nextId("side-bar-id-")
+              const key = nextId("side-bar-id-");
               return <RederSideBar key={`render-item-${key}`} c={c} />;
             })}
           </List>
+          <Button
+            onClick={handleCloseSession}
+            className={classes.btncls}
+          >
+            Salir
+          </Button>
         </Drawer>
         <main
           className={classes.content}

@@ -10,8 +10,9 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
     backgroundColor: "#ffff",
-    padding: 15,
+    padding: 30,
     borderRadius: 10,
+    paddingTop: '30px'
   },
   avatar: {
     margin: theme.spacing(1),
@@ -25,10 +26,10 @@ const useStyles = makeStyles((theme) => ({
 export default function ContentInformation({ description, img, children }) {
   const classes = useStyles();
   return (
-    <Container component="main" maxWidth="lg" style={{ position: "relative" }}>
+    <Container component="main" maxWidth="lg" style={{ position: "relative", minWidth: '408px' }}>
       <CssBaseline />
       <div className={classes.paper}>
-        <Alert style={{ position: "absolute", left: "10px" }} severity="info">
+        <Alert style={{ position: "absolute", left: "15px", top: 0 }} severity="info">
           {description}
         </Alert>
         <img alt="" src={img} className={classes.logo} />

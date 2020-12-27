@@ -1,4 +1,5 @@
 import React, { createContext, useState } from "react";
+import { closeSession, openSession } from '../../utils/session'
 import moment from 'moment'
 
 const AuthContext = createContext();
@@ -10,14 +11,12 @@ const AuthProvider = ({ children }) => {
     isAuth,
     activateAuth: (token, refresh) => {
       if ((token, refresh)) {
-        console.log('nuevo  ', token)
         const time = moment().add(23, 'h').toDate();
-        window.localStorage.setItem("time-token", time);
-        window.localStorage.setItem("oki-token", token);
-        window.localStorage.setItem("oki-refresh", refresh);
+        openSession(time, token, refresh)
         setIsAuth({ status: true });
       } else {
         setIsAuth({ status: false });
+        closeSession()
       }
     },
   };

@@ -36,6 +36,7 @@ function ProviderListContainer({ notification_create }) {
 
   return (
     <AlignItemsList
+      title="Lista de proveedores"
       component={ItemProvider}
       list={providers}
       onClick={handleDelete}
