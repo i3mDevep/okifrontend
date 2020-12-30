@@ -9,12 +9,14 @@ export const FieldController = ({
   grid,
   children,
   style,
+  extras
 }) => {
   let ComponentField = component;
   return (
     <Grid item {...grid} style={style} >
       {children}
       <Controller {...controller} as={<ComponentField {...field} />} />
+      { extras }
     </Grid>
   );
 };

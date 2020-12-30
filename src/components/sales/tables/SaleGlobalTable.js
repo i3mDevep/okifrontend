@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Collapse from "@material-ui/core/Collapse";
@@ -15,10 +14,12 @@ import Paper from "@material-ui/core/Paper";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 
+import payment from "../../../const/payment";
 
-import payment from '../../../const/payment'
+import moment from "moment";
 
-import moment from 'moment'
+import { SelectOrdered, SelectTypePayment } from "../inputs";
+import { SearchForm } from "../forms";
 
 const useRowStyles = makeStyles({
   root: {
@@ -28,8 +29,15 @@ const useRowStyles = makeStyles({
   },
 });
 
-function Row({ id, date_sale, type_payment, total_price_sale, total_product_sale, sale_detail=[], onClickFetch }) {
-
+function Row({
+  id,
+  date_sale,
+  type_payment,
+  total_price_sale,
+  total_product_sale,
+  sale_detail = [],
+  onClickFetch,
+}) {
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
 
@@ -41,17 +49,20 @@ function Row({ id, date_sale, type_payment, total_price_sale, total_product_sale
             aria-label="expand row"
             size="small"
             onClick={() => {
-              if(!open){
-                onClickFetch(id)
+              if (!open) {
+                onClickFetch(id);
               }
-              setOpen(!open)
+              setOpen(!open);
             }}
           >
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
         <TableCell component="th" scope="row">
-        { moment(date_sale).format('LLL') }
+          {id}
+        </TableCell>
+        <TableCell component="th" scope="row">
+          {moment(date_sale).format("LLL")}
         </TableCell>
         <TableCell align="center">{payment[type_payment].label}</TableCell>
         <TableCell align="right">{total_price_sale}</TableCell>
@@ -92,14 +103,28 @@ function Row({ id, date_sale, type_payment, total_price_sale, total_product_sale
   );
 }
 
-export function SaleGlobalTable({ globalSale=[], pagination, onClickFetch, sale_detail }) {
+export function SaleGlobalTable({
+  globalSale = [],
+  pagination,
+  onClickFetch,
+  sale_detail,
+  filter,
+  order,
+  search,
+}) {
   return (
     <TableContainer component={Paper}>
-      { pagination }
+      <div style={{ display: "flex" }}>
+        {pagination}
+        <SelectOrdered {...order} />
+        <SelectTypePayment {...filter} />
+        <SearchForm {...search} />
+      </div>
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow>
             <TableCell />
+            <TableCell>Numero factura</TableCell>
             <TableCell>Fecha de venta</TableCell>
             <TableCell align="right">Metodo de pago</TableCell>
             <TableCell align="right">Total de dinero</TableCell>
@@ -108,7 +133,12 @@ export function SaleGlobalTable({ globalSale=[], pagination, onClickFetch, sale_
         </TableHead>
         <TableBody>
           {globalSale.map((row) => (
-            <Row key={row.id} sale_detail={sale_detail} onClickFetch={onClickFetch} {...row} />
+            <Row
+              key={row.id}
+              sale_detail={sale_detail}
+              onClickFetch={onClickFetch}
+              {...row}
+            />
           ))}
         </TableBody>
       </Table>
