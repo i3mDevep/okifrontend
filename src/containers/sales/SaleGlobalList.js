@@ -8,6 +8,20 @@ function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
+function filterOrSearch(history, query, tag, value) {
+  if (value === "all") {
+    query.delete("type_payment");
+  } else {
+    query.set("page", 1);
+    query.set(tag, value);
+  }
+  history.push({
+    pathname: "/app/sales/",
+    search: query.toString(),
+  });
+}
+
+
 export default function SaleGlobalList() {
   const [salesGlobal, setsalesGlobal] = useState([]);
   const [quantityData, setquantityData] = useState();
@@ -39,34 +53,15 @@ export default function SaleGlobalList() {
   };
 
   const handleSelectOrder = (event) => {
-    query.set("page", 1);
-    query.set("order", event.target.value);
-    history.push({
-      pathname: "/app/sales/",
-      search: query.toString(),
-    });
+    filterOrSearch(history, query, "order", event.target.value)
   };
 
   const handleSelectFilter = (event) => {
-    if (event.target.value === "all") {
-      query.delete("type_payment");
-    } else {
-      query.set("page", 1);
-      query.set("type_payment", event.target.value);
-    }
-    history.push({
-      pathname: "/app/sales/",
-      search: query.toString(),
-    });
+    filterOrSearch(history, query, "type_payment", event.target.value)
   };
 
   const handleSearch = ({ search }) => {
-    query.set("page", 1);
-    query.set("search", search );
-    history.push({
-      pathname: "/app/sales/",
-      search: query.toString(),
-    });
+    filterOrSearch(history, query, "search", search)
   }
 
   return (
@@ -87,7 +82,7 @@ export default function SaleGlobalList() {
       }}
       pagination={
         <Pagination
-          style={{ margin: "auto 0" }}
+          style={{ margin: "auto 0", minWidth: '350px' }}
           page={parseInt(query.get("page")) || 1}
           onChange={handlePaginationChange}
           count={quantityData}

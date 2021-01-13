@@ -9,3 +9,9 @@ export const serviceSales = async (query) => {
 export const serviceSaleDetail = async (id) => {
   return await api.get("/sale-global/list/" + id);
 };
+export const serviceReportSaleToday = async () => {
+  return await api.get("/sale-global/report-today/")
+}
+export const serviceReportSaleWeek = async () => {
+  return await api.get("/sale-global/report-week/")
+}

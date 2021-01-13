@@ -3,16 +3,17 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 
 export const formSearch = [
   {
-    grid: { xs: 6 },
+    grid: { xs: 12 },
     component: listFields["textField"],
     controller: {
       name: "search",
-      defaultValue: "",
+      defaultValue: "michael",
     },
     field: {
-      label: "codigo o #factura",
+      label: "Factura o Codigo",
       required: false,
       autoComplete: "off",
+      fullWidth: true,
     },
     extras: <FormHelperText>Seleccion orden de datos</FormHelperText>
   },

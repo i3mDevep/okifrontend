@@ -1,5 +1,4 @@
-import AdbIcon from '@material-ui/icons/Adb';
-import BookIcon from '@material-ui/icons/Book';
+import HomeIcon from '@material-ui/icons/Home';
 import ViewListIcon from '@material-ui/icons/ViewList';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import AddBoxIcon from '@material-ui/icons/AddBox';
@@ -9,6 +8,11 @@ import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 import ViewModuleIcon from "@material-ui/icons/ViewModule";
 
 export const config = [
+    {
+        title: 'Home',
+        path: '/app',
+        icon: HomeIcon,
+    },
     {
         title: 'Productos',
         icon: AssignmentIcon,

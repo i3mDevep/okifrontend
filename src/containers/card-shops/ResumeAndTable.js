@@ -7,6 +7,7 @@ import ReactNotification, {
 import Grid from "@material-ui/core/Grid";
 import { formAddProduct, formConfirmSale } from "./renderForms";
 import { convertErrorInString } from "../../utils/error/convertErrorInString";
+import FactureDialog from "../card-shops/Facture";
 
 import {
   serviceListCardShops,
@@ -31,6 +32,8 @@ async function re_render(setstate, setresume) {
 export function ResumeAndTable() {
   const [list, setlist] = useState([]);
   const [totals, settotals] = useState({});
+  const [openFacture, setopenFacture] = useState(false)
+  const [sales, setsales] = useState([])
 
   useEffect(async () => {
     re_render(setlist, settotals);
@@ -74,16 +77,23 @@ export function ResumeAndTable() {
     question(
       {
         title: "Confirmación",
-        message: "¿ deseas realizar esta venta ?",
+        message: "¿Deseas realizar esta venta?",
       },
       async () => {
         let body_serializer = {
           total_price_sale: 0,
           total_product_sale: 0,
+          total_util_sale: 0,
         };
         Object.assign(body_serializer, payment);
-        await serviceConfirmSale(body_serializer);
-        re_render(setlist, settotals);
+        try {
+          let res = await serviceConfirmSale(body_serializer);
+          setsales(res.data)
+          setopenFacture(true)
+          re_render(setlist, settotals);
+        } catch (error) {
+          console.error(error.message);
+        }
       }
     );
   };
@@ -91,6 +101,7 @@ export function ResumeAndTable() {
   return (
     <Grid container spacing={2}>
       <ReactNotification />
+      <FactureDialog sales={sales} open={openFacture} />
       <Grid item xs={12} sm={8}>
         <CardShopTable data={list} deleteAction={handleDelete} />
       </Grid>

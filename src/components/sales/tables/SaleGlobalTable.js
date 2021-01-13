@@ -1,7 +1,5 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Box from "@material-ui/core/Box";
-import Collapse from "@material-ui/core/Collapse";
 import IconButton from "@material-ui/core/IconButton";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -9,10 +7,13 @@ import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
+import Box from "@material-ui/core/Box";
+import Collapse from "@material-ui/core/Collapse";
+import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
 
 import payment from "../../../const/payment";
 
@@ -20,6 +21,8 @@ import moment from "moment";
 
 import { SelectOrdered, SelectTypePayment } from "../inputs";
 import { SearchForm } from "../forms";
+
+import { SaleDetail } from "./SaleDetail";
 
 const useRowStyles = makeStyles({
   root: {
@@ -35,7 +38,7 @@ function Row({
   type_payment,
   total_price_sale,
   total_product_sale,
-  sale_detail = [],
+  sale_detail,
   onClickFetch,
 }) {
   const [open, setOpen] = React.useState(false);
@@ -75,26 +78,7 @@ function Row({
               <Typography variant="h6" gutterBottom component="div">
                 Venta Detalle
               </Typography>
-              <Table size="small" aria-label="purchases">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Producto</TableCell>
-                    <TableCell>Codigo</TableCell>
-                    <TableCell>Cantidad</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {sale_detail.map((sale) => (
-                    <TableRow key={sale.id}>
-                      <TableCell component="th" scope="row">
-                        {sale.product.name}
-                      </TableCell>
-                      <TableCell>{sale.product.barcode}</TableCell>
-                      <TableCell>{sale.count}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+              <SaleDetail sale_detail={sale_detail} />
             </Box>
           </Collapse>
         </TableCell>
@@ -107,19 +91,27 @@ export function SaleGlobalTable({
   globalSale = [],
   pagination,
   onClickFetch,
-  sale_detail,
   filter,
   order,
+  sale_detail,
   search,
 }) {
   return (
     <TableContainer component={Paper}>
-      <div style={{ display: "flex" }}>
-        {pagination}
-        <SelectOrdered {...order} />
-        <SelectTypePayment {...filter} />
+      <Grid container style={{ alignItems: 'center'}} >
+        <Grid item xs={12} sm={6} lg={4}>
+          {pagination}
+        </Grid>
+        <Grid item sm={6} lg={2}>
+          <SelectOrdered {...order} />
+        </Grid>
+        <Grid item sm={6} lg={2}>
+          <SelectTypePayment {...filter} />
+        </Grid>
+        <Grid item xs={12} sm={6} lg={3}>
         <SearchForm {...search} />
-      </div>
+        </Grid>
+      </Grid>
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow>
@@ -135,8 +127,8 @@ export function SaleGlobalTable({
           {globalSale.map((row) => (
             <Row
               key={row.id}
-              sale_detail={sale_detail}
               onClickFetch={onClickFetch}
+              sale_detail={sale_detail}
               {...row}
             />
           ))}

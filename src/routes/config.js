@@ -6,14 +6,14 @@ import MarkScreen from '../views/marks'
 import SideBarConfig from '../components/layout/sidebar';
 import CardShopScreen from '../views/card-shop'
 import SaleGlobalList from '../containers/sales/SaleGlobalList'
+import HomeScreen from '../views/home'
 
 export const settings = {
   path_default_access_restricted: "/",
   path_default_access_allow: "/app",
 };
 
-const Cm2 = () => <h1>privado</h1>;
-const Cm = () => <h1>publico</h1>;
+
 const Cm3 = () => <h1>perro</h1>;
 
  
@@ -31,7 +31,7 @@ const routes = [
     path: '/app',
     type_route: 'private',
     layout: SideBarConfig,
-    component: Cm,
+    component: HomeScreen,
     routes: [
       {
         path: '/app/products',
