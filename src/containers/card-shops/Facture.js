@@ -7,40 +7,58 @@ import { logoMain } from "../../components/common/urls";
 import { currencyFormat } from "../../utils/formatCOP";
 import moment from "moment";
 
-const Facture = forwardRef(({ sale }, ref) =>{
- return(
-  <div ref={ref} >
-    <div style={{ width: "100px", margin: "0 auto" }}>
-      <img style={{ width: "100%" }} src={logoMain} />
+const Facture = forwardRef(({ sale }, ref) => {
+  return (
+    <div ref={ref}>
+      <div style={{ width: "200px", margin: "0 auto" }}>
+        <img style={{ width: "100%" }} src={logoMain} />
+      </div>
+      <div>
+        <hr style={{ borderStyle: "dashed" }} />
+      </div>
+      <span style={{ margin: "10px", fontSize: "18px" }}>
+        {moment(Date.now()).format("YYYY/MM/DD HH:mm:ss")}
+      </span>
+      <div>
+        <span style={{ margin: "10px", fontSize: "18px" }}>
+          NIT: 1017250445-4
+        </span>
+      </div>
+      <div>
+        <hr style={{ borderStyle: "dashed" }} />
+      </div>
+      <table style={{ padding: "0 30px", fontSize: "16px" }}>
+        <thead>
+          <th style={{ textAlign: "left" }}>c</th>
+          <th>producto</th>
+          <th>subtotal</th>
+        </thead>
+        <tbody>
+          {sale &&
+            sale.products.map((p) => (
+              <tr>
+                <td>{p.count}</td>
+                <td>{p.product.name}</td>
+                <td>{currencyFormat(p.product.price * p.count)}</td>
+              </tr>
+            ))}
+        </tbody>
+        <tfoot>
+          <tr>
+            <td>Total:</td>
+            <td>{currencyFormat(sale.total_sale_price || 0)} </td>
+          </tr>
+        </tfoot>
+      </table>
+      <div>
+        <hr style={{ borderStyle: "dashed" }} />
+      </div>
+      <div style={{ margin: "0 auto" }}>
+        <span style={{ margin:'0 40px', fontSize: "18px" }}>Gracias por tu compra</span>
+      </div>
     </div>
-    <span style={{ margin: "10px" }}>
-      {moment(Date.now()).format("MMMM Do YYYY, h:mm:ss a")}
-    </span>
-    <table style={{ padding: "0 30px" }} >
-      <thead>
-        <th style={{ textAlign: "left" }}>cantidad</th>
-        <th>producto</th>
-        <th>subtotal</th>
-      </thead>
-      <tbody>
-        {sale &&
-          sale.products.map((p) => (
-            <tr>
-              <td>{p.count}</td>
-              <td>{p.product.name}</td>
-              <td>{currencyFormat(p.product.price*p.count)}</td>
-            </tr>
-          ))}
-      </tbody>
-      <tfoot>
-        <tr>
-          <td>Total:</td>
-          <td>{currencyFormat(sale.total_sale_price || 0)} </td>
-        </tr>
-      </tfoot>
-    </table>
-  </div>
-)})
+  );
+});
 
 export default function SimpleDialog(props) {
   const { onClose, open, sales } = props;
@@ -53,7 +71,6 @@ export default function SimpleDialog(props) {
   return (
     <Dialog
       onClose={handleClose}
-      disableBackdropClick
       aria-labelledby="simple-dialog-title"
       open={open}
     >

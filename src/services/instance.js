@@ -1,13 +1,23 @@
 import axios from "axios";
 import moment from "moment";
 
-//const baseURL = "https://okibackend.herokuapp.com/api/";
-const baseURL = "http://localhost:8001/api/";
+const baseURL = "https://okibackend.herokuapp.com/api/";
+const baseURL_BASE = "https://okibackend.herokuapp.com/";
+
+//const baseURL = "http://localhost:8001/api/";
 
 
 function token() {
   return window.localStorage.getItem("oki-token");
 }
+
+export const instanceNotApi = axios.create({
+  baseURL: baseURL_BASE,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
 
 const instance = axios.create({
   baseURL: baseURL,

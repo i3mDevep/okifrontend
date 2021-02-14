@@ -6,7 +6,10 @@ import {
 } from "../../containers/sales/SaleReportWeek";
 import Grid from "@material-ui/core/Grid";
 
+import Metabase from "../../components/metabase"
+
 export default function Home() {
+  return <Metabase />
   return (
     <Grid container spacing={2}>
       <Grid item xs={12} sm={6}>
@@ -19,6 +22,9 @@ export default function Home() {
           </Grid>
           <Grid item xs={12}>
             <SaleReportUtils />
+          </Grid>
+          <Grid item xs={12}>
+            <Metabase />
           </Grid>
         </Grid>
       </Grid>

@@ -101,7 +101,7 @@ export function ResumeAndTable() {
   return (
     <Grid container spacing={2}>
       <ReactNotification />
-      <FactureDialog sales={sales} open={openFacture} />
+      <FactureDialog sales={sales} open={openFacture} onClose={() => setopenFacture(false)} />
       <Grid item xs={12} sm={8}>
         <CardShopTable data={list} deleteAction={handleDelete} />
       </Grid>
